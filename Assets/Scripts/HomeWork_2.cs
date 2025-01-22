@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,7 @@ public class HomeWork_2 : MonoBehaviour
     }
     public void DealDamage() 
     {
-        int damage = 0;
-        damage = baseDamage * (int)multiplier;
-        Debug.Log(damage);
+        int damage = baseDamage * (int)multiplier;
+        Debug.Log($"нанесенный урон {damage}");           
     }
 }
