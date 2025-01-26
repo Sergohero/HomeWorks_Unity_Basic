@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer m_Renderer;
+    [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private bool isEnemy;
 
     public void SetActive(bool isActive) 
@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
 
     public void Init(bool isEnemy, string name) 
     {
-        m_Renderer.material.color = isEnemy ? Color.red : Color.blue;
+        meshRenderer.material.color = isEnemy ? Color.red : Color.blue;
         this.isEnemy = isEnemy;
         gameObject.name = $"Character {name}";
     }

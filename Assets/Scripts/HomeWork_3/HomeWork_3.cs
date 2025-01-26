@@ -4,7 +4,7 @@ public class HomeWork_3 : MonoBehaviour
 {
     [SerializeField] private int hp;
     [SerializeField] private int damage;
-    [SerializeField] private Character Character;
+    [SerializeField] private Character character;
     [SerializeField] private int CharacterCount;
 
     private bool isDeath;
@@ -53,11 +53,11 @@ public class HomeWork_3 : MonoBehaviour
             b = Random.Range(0f, 10f);
             c = Random.Range(0f, 10f);
 
-            Character cube = Instantiate(Character, new Vector3(a, b, c), Quaternion.identity);            
+            Character cube = Instantiate(character, new Vector3(a, b, c), Quaternion.identity);            
             cube.Init(isEnemy, i.ToString());
         }
 
-        Character.SetActive(false);
+        character.SetActive(false);
     }
 
 }

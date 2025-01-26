@@ -241,7 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a318891b4298b0c4baf60a9b7253393a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Renderer: {fileID: 987583292}
+  meshRenderer: {fileID: 987583292}
+  isEnemy: 0
 --- !u!1 &1404496499
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   damage: 1
-  Character: {fileID: 987583295}
+  character: {fileID: 987583295}
   CharacterCount: 5
 --- !u!4 &1573629090
 Transform:
