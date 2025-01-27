@@ -7,7 +7,7 @@ namespace homework
         [SerializeField] private int hp;
         [SerializeField] private int damage;
         [SerializeField] private Character character;
-        [SerializeField] private int CharacterCount;
+        [SerializeField] private int characterCount;
 
         private bool isDeath;
         private bool isEnemy;
@@ -43,19 +43,19 @@ namespace homework
 
         private void Spawner()
         {
-            float a = 0;
-            float b = 0;
-            float c = 0;
+            float x = 0;
+            float y = 0;
+            float z = 0;
 
-            for (int i = 0; i < CharacterCount; i++)
+            for (int i = 0; i < characterCount; i++)
             {
                 isEnemy = Random.Range(0, 2) != 0;
 
-                a = Random.Range(0f, 10f);
-                b = Random.Range(0f, 10f);
-                c = Random.Range(0f, 10f);
+                x = Random.Range(0f, 10f);
+                y = Random.Range(0f, 10f);
+                z = Random.Range(0f, 10f);
 
-                Character cube = Instantiate(character, new Vector3(a, b, c), Quaternion.identity);
+                Character cube = Instantiate(character, new Vector3(x, y, z), Quaternion.identity);
                 cube.Init(isEnemy, i.ToString());
             }
 
