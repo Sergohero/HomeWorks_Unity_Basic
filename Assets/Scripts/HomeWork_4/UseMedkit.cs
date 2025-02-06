@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UseMedkit : MonoBehaviour
+namespace code
 {
-    private void OnTriggerEnter(Collider other)
+    public class UseMedkit : MonoBehaviour
     {
-        Destroy(gameObject);
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(gameObject);
+        }
     }
 }

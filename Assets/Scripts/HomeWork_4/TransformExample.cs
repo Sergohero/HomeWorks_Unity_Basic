@@ -1,26 +1,29 @@
 using UnityEngine;
 
-public class TransformExample : MonoBehaviour
+namespace code
 {
-    [SerializeField] private Transform _transform;
-    [SerializeField] private float _speed = 3.0f;
-    [SerializeField] private int _x;
-    [SerializeField] private int _y;
-    [SerializeField] private int _z;
-
-    private void Start()
+    public class TransformExample : MonoBehaviour
     {
-        TransformPlayerPos();
-        TransformPlayerRotate();       
-    }
+        [SerializeField] private Transform _transform;
+        [SerializeField] private float _speed = 3.0f;
+        [SerializeField] private int _x;
+        [SerializeField] private int _y;
+        [SerializeField] private int _z;
 
-    private void TransformPlayerPos() 
-    {
-        _transform.position = new Vector3(_x, _y, _z);
-    }
+        private void Start()
+        {
+            TransformPlayerPos();
+            TransformPlayerRotate();
+        }
 
-    private void TransformPlayerRotate() 
-    {
-        _transform.Rotate(Vector3.up * _speed);
+        private void TransformPlayerPos()
+        {
+            _transform.position = new Vector3(_x, _y, _z);
+        }
+
+        private void TransformPlayerRotate()
+        {
+            _transform.Rotate(Vector3.up * _speed);
+        }
     }
 }

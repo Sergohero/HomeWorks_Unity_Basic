@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public class RigidBodyExample : MonoBehaviour
+namespace code
 {
-    private Rigidbody _rb;
-    private float _pow = 10f;
 
-    private void Start()
+    public class RigidBodyExample : MonoBehaviour
     {
-        _rb = GetComponent<Rigidbody>();
-    }
+        private Rigidbody _rb;
+        private float _pow = 10f;
 
-    private void FixedUpdate()
-    {
-        _rb.AddForce(Vector3.forward * (_pow * Time.deltaTime));
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+
+        private void FixedUpdate()
+        {
+            _rb.AddForce(Vector3.forward * (_pow * Time.deltaTime));
+        }
     }
 }

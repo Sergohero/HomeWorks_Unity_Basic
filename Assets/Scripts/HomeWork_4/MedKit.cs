@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MedKit : MonoBehaviour
+namespace code
 {
-    
+    public class MedKit : MonoBehaviour
+    {
+
+    }
 }
