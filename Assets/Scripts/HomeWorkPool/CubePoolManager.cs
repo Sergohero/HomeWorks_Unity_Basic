@@ -4,63 +4,90 @@ using UnityEngine;
 namespace Scripts.HomeWorkPool
 {
     public class CubePoolManager : MonoBehaviour
-{
-    [SerializeField] private GameObject cubePrefab; 
-    [SerializeField] private Vector3 spawnAreaCenter = Vector3.zero;
-    
-    private int poolSize = 100; 
-    private int activeCubesCount = 10; 
-    private float spawnAreaRadius = 5f; 
-    private List<GameObject> cubes = new List<GameObject>();
-    private int currentGroupIndex = 0;
+    {
+        [SerializeField] private GameObject _cubePrefab;
+        [SerializeField] private Vector3 _spawnAreaCenter = Vector3.zero;
 
-    private void Start()
-    {
-        InitializePool();
-        InvokeRepeating("SwitchCubes", 1f, 1f);
-    }
-    private void InitializePool()
-    {
-        for (int i = 0; i < poolSize; i++)
+        private int _poolSize = 100;
+        private int _activeCubesCount = 10;
+        private float _spawnAreaRadius = 5f;
+        private List<GameObject> _cubes = new List<GameObject>();
+        private int _currentGroupIndex = 0;
+
+        private float _spawnInterval = 1f;
+        private float _timer = 0f;
+
+        private void Start()
         {
-            GameObject cube = Instantiate(cubePrefab, new Vector3(0, -100, 0), Quaternion.identity);
-            Renderer renderer = cube.GetComponent<Renderer>();
-            
-            renderer.material = new Material(renderer.material); 
-            renderer.material.color = Random.ColorHSV();
-            cube.SetActive(false); 
-            cubes.Add(cube);
+            InitializePool();
         }
-        ActivateGroup(currentGroupIndex);
-    }
-    private void SwitchCubes()
-    {
-        DeactivateGroup(currentGroupIndex);
-        currentGroupIndex = (currentGroupIndex + activeCubesCount) % poolSize;
-        ActivateGroup(currentGroupIndex);
-    }
-    private void DeactivateGroup(int startIndex)
-    {
-        for (int i = startIndex; i < startIndex + activeCubesCount; i++)
+
+        private void Update()
         {
-            if (i < cubes.Count)
+            _timer += Time.deltaTime;
+
+            if (_timer >= _spawnInterval)
             {
-                cubes[i].SetActive(false);
+                _timer = 0f;
+                SpawnAndDespawn();
             }
         }
-    }
-    private void ActivateGroup(int startIndex)
-    {
-        for (int i = startIndex; i < startIndex + activeCubesCount; i++)
+
+        private void InitializePool()
         {
-            if (i < cubes.Count)
+            for (int i = 0; i < _poolSize; i++)
             {
-                GameObject cube = cubes[i];
-                cube.SetActive(true);
-                Vector3 randomPosition = spawnAreaCenter + new Vector3(Random.Range(-spawnAreaRadius, spawnAreaRadius), Random.Range(-spawnAreaRadius, spawnAreaRadius), Random.Range(-spawnAreaRadius, spawnAreaRadius));
-                cube.transform.position = randomPosition;
+                GameObject cube = Instantiate(_cubePrefab, new Vector3(0, -100, 0), Quaternion.identity);
+                Renderer renderer = cube.GetComponent<Renderer>();
+
+                renderer.material = new Material(renderer.material); 
+                renderer.material.color = Random.ColorHSV();
+                cube.SetActive(false);
+                _cubes.Add(cube);
+            }
+            Spawn(_currentGroupIndex);
+        }
+
+        private void SpawnAndDespawn()
+        {
+            Despawn(_currentGroupIndex);
+
+            _currentGroupIndex = (_currentGroupIndex + _activeCubesCount) % _poolSize;
+
+            Spawn(_currentGroupIndex);
+        }
+
+        private void Despawn(int startIndex)
+        {
+            for (int i = startIndex; i < startIndex + _activeCubesCount; i++)
+            {
+                if (i < _cubes.Count)
+                {
+                    _cubes[i].SetActive(false);
+                }
+            }
+        }
+
+        private void Spawn(int startIndex)
+        {
+            for (int i = startIndex; i < startIndex + _activeCubesCount; i++)
+            {
+                if (i < _cubes.Count)
+                {
+                    GameObject cube = _cubes[i];
+                    cube.SetActive(true);
+
+                    Vector3 randomPosition = _spawnAreaCenter +
+                        new Vector3(
+                            Random.Range(-_spawnAreaRadius, _spawnAreaRadius),
+                            Random.Range(-_spawnAreaRadius, _spawnAreaRadius),
+                            Random.Range(-_spawnAreaRadius, _spawnAreaRadius)
+                        );
+
+                    cube.transform.position = randomPosition;
+                }
             }
         }
     }
 }
-}
+
